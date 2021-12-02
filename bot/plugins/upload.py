@@ -69,8 +69,6 @@ async def _upload(c: UtubeBot, m: Message):
         await snt.edit_text("Downloaded to local, Now starting to upload to youtube...")
     except Exception as e:
         log.warning(e, exc_info=True)
-        pass
-
     title = " ".join(m.command[1:])
     upload = Uploader(file, title)
     status, link = await upload.start(progress, snt)
@@ -149,4 +147,3 @@ async def progress(
 
     except Exception as e:
         log.info(e)
-        pass

@@ -61,7 +61,7 @@ class Uploader:
                 categoryId = random.choice(list(self.video_category))
 
             categoryName = self.video_category[categoryId]
-            title = self.title if self.title else os.path.basename(self.file)
+            title = self.title or os.path.basename(self.file)
             title = (
                 (Config.VIDEO_TITLE_PREFIX + title + Config.VIDEO_TITLE_SUFFIX)
                 .replace("<", "")
@@ -71,11 +71,7 @@ class Uploader:
                 Config.VIDEO_DESCRIPTION
                 + "\nUploaded to YouTube with https://tx.me/youtubeitbot"
             )[:5000]
-            if not Config.UPLOAD_MODE:
-                privacyStatus = "private"
-            else:
-                privacyStatus = Config.UPLOAD_MODE
-
+            privacyStatus = "private" if not Config.UPLOAD_MODE else Config.UPLOAD_MODE
             properties = dict(
                 title=title,
                 description=description,
